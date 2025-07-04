@@ -65,14 +65,14 @@ const SelectCategories = ({ category, setCategory }) => {
   const [showOptions, setShowOptions] = useState(false);
 
   const categories = [
-    { id: 'comida', texto: 'Comida' },
-    { id: 'cuentas y pagos', texto: 'Cuentas y pagos' },
-    { id: 'hogar', texto: 'Hogar' },
-    { id: 'transporte', texto: 'Transporte' },
-    { id: 'ropa', texto: 'Ropa' },
-    { id: 'salud e higiene', texto: 'Salud e Higiene' },
-    { id: 'compras', texto: 'Compras' },
-    { id: 'diversion', texto: 'Diversion' }
+    { id: 'food', text: 'Food' },
+    { id: 'accounts and payments', text: 'Accounts and payments' },
+    { id: 'home', text: 'Home' },
+    { id: 'transportation', text: 'Transportation' },
+    { id: 'clothing', text: 'Clothing' },
+    { id: 'health and hygiene', text: 'Health and Hygiene' },
+    { id: 'shopping', text: 'Shopping' },
+    { id: 'fun', text: 'Fun' }
   ]
 
   const handleCategory = (e) => {
