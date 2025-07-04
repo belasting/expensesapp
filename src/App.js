@@ -5,7 +5,6 @@ import Button from './components/elements/Button';
 import ButtonCloseSession from './components/elements/BottonCloseSession';
 import FormExpenditure from './components/expenses/FormExpenditure';
 import ToalBarSpent from './components/expenses/TotalBarSpent';
-import firebaseApp from './firebase/firebaseConfig';
 
 const App = () => {
   return (
