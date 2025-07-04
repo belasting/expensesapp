@@ -2,7 +2,7 @@ import React from 'react'
 import { Header, Title } from '../elements/Header';
 import { Helmet } from "react-helmet";
 import BtnReturn from '../elements/BtnReturn'
-import ToalBarSpent from './TotalBarSpent';
+import TotalBarSpent from './TotalBarSpent';
 import useGetExpenses from '../../hooks/useGetExpenses';
 import {
   Lista,
@@ -29,11 +29,10 @@ import deleteExpenditure from '../../firebase/deleteExpenditure';
 
 const ExpenseList = () => {
 
-  // Custom hook om uitgaven te laden, en om meer uitgaven te laden als er meer zijn
+  // Custom hook to load expenses and to load more if available
   const [expenses, getMoreExpenses, ThereAreMoreExpensesToLoad] = useGetExpenses();
-  //const { user } = useAuth(); // als je gebruikersdata wil gebruiken
 
-  // Format de datum van een uitgave van unix timestamp naar dd/MM/yyyy
+  // Format date from unix timestamp to dd/MM/yyyy
   const formatDate = ({ date }) => {
     if (date) {
       return format(fromUnixTime(date), 'dd/MM/yyyy');
@@ -42,12 +41,11 @@ const ExpenseList = () => {
     }
   }
 
-  // Checkt of de datum van de huidige uitgave gelijk is aan die van de vorige (voor grouping op datum)
+  // Checks if current expense date is same as previous (for grouping by date)
   const dateIsSame = (index, expenses, expense) => {
     if (index !== 0) {
       const currentDate = formatDate(expense);
       const previousDate = formatDate(expenses[index - 1]);
-
       return currentDate === previousDate;
     }
   }
@@ -55,46 +53,46 @@ const ExpenseList = () => {
   return (
     <>
       <Helmet>
-        <title>Expenses List</title> {/* Pagina titel */}
+        <title>Expenses List</title> {/* Page title */}
       </Helmet>
 
       <Header>
-        <BtnReturn /> {/* Terug knop */}
-        <Title>Expenses List</Title> {/* Header titel */}
+        <BtnReturn /> {/* Back button */}
+        <Title>Expenses List</Title> {/* Header title */}
       </Header>
 
       <Lista>
         {expenses.map((expense, index) => (
           <div key={index}>
-            {/* Alleen datum tonen als het anders is dan de vorige uitgave */}
+            {/* Show date only if different from previous expense date */}
             {!dateIsSame(index, expenses, expense) && <Fecha>{formatDate(expense)}</Fecha>}
             <ElementoLista key={expense.id}>
               <Categoria>
-                <IconCategory name={expense.category} /> {/* Categorie icoon */}
+                <IconCategory name={expense.category} /> {/* Category icon */}
                 {expense.category}
               </Categoria>
 
               <Descripcion>
-                {expense.description} {/* Beschrijving uitgave */}
+                {expense.description} {/* Expense description */}
               </Descripcion>
 
               <Valor>
-                {convertToCurrency(expense.amount)} {/* Bedrag netjes geformat */}
+                {convertToCurrency(expense.amount)} {/* Amount formatted */}
               </Valor>
 
               <ContenedorButtones>
                 <ButtonAccion to={`/edit/${expense.id}`} as={Link}>
-                  <IconEdit /> {/* Edit icoon/link */}
+                  <IconEdit /> {/* Edit icon/link */}
                 </ButtonAccion>
                 <ButtonAccion onClick={() => deleteExpenditure(expense.id)} as="button">
-                  <IconDelete /> {/* Delete knop */}
+                  <IconDelete /> {/* Delete button */}
                 </ButtonAccion>
               </ContenedorButtones>
             </ElementoLista>
           </div>
         ))}
 
-        {/* Knop om meer uitgaven te laden, als er nog zijn */}
+        {/* Button to load more expenses, if available */}
         {ThereAreMoreExpensesToLoad && (
           <ContenedorButtonCentral>
             <ButtonCargarMas onClick={() => getMoreExpenses()}>
@@ -103,7 +101,7 @@ const ExpenseList = () => {
           </ContenedorButtonCentral>
         )}
 
-        {/* Als er geen uitgaven zijn, laat een boodschap zien met link om toe te voegen */}
+        {/* Show message with link if no expenses */}
         {expenses.length === 0 && (
           <ContenedorSubTitle>
             <SubTitle>
@@ -116,7 +114,7 @@ const ExpenseList = () => {
         )}
       </Lista>
 
-      <ToalBarSpent /> {/* Totaal balk met uitgaven */}
+      <TotalBarSpent /> {/* Total expenses bar */}
     </>
   );
 }

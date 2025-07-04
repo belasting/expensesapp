@@ -1,33 +1,35 @@
-import React from 'react'
-import { ReactComponent as IconoComida } from '../../images/cat_comida.svg';
-import { ReactComponent as IconoCompras } from '../../images/cat_compras.svg';
-import { ReactComponent as IconoCuentasYPagos } from '../../images/cat_cuentas-y-pagos.svg';
-import { ReactComponent as IconoDiversion } from '../../images/cat_diversion.svg';
-import { ReactComponent as IconoHogar } from '../../images/cat_hogar.svg';
-import { ReactComponent as IconoRopa } from '../../images/cat_ropa.svg';
-import { ReactComponent as IconoSaludEHigiene } from '../../images/cat_salud-e-higiene.svg';
-import { ReactComponent as IconoTransporte } from '../../images/cat_transporte.svg';
+import React from 'react';
+import { ReactComponent as IconFood } from '../../images/cat_comida.svg';
+import { ReactComponent as IconShopping } from '../../images/cat_compras.svg';
+import { ReactComponent as IconBills } from '../../images/bills_and_payments.svg';
+import { ReactComponent as IconEntertainment } from '../../images/fun.svg';
+import { ReactComponent as IconHome } from '../../images/cat_hogar.svg';
+import { ReactComponent as IconClothes } from '../../images/clothing.svg';
+import { ReactComponent as IconHealthHygiene } from '../../images/health_and_hygiene.svg';
+import { ReactComponent as IconTransport } from '../../images/transportation.svg';
 
 const IconCategory = ({ name }) => {
   switch (name) {
-    case 'comida':
-      return <IconoComida />;
-    case 'compras':
-      return <IconoCompras />;
-    case 'cuentas y pagos':
-      return <IconoCuentasYPagos />;
-    case 'diversion':
-      return <IconoDiversion />;
-    case 'hogar':
-      return <IconoHogar />;
-    case 'ropa':
-      return <IconoRopa />;
-    case 'salud e higiene':
-      return <IconoSaludEHigiene />;
-    case 'transporte':
-      return <IconoTransporte />;
+    case 'food':
+      return <IconFood />;
+    case 'shopping':
+      return <IconShopping />;
+    case 'bills and payments':
+      return <IconBills />;
+    case 'entertainment':
+      return <IconEntertainment />;
+    case 'home':
+      return <IconHome />;
+    case 'clothing':
+      return <IconClothes />;
+    case 'health_and_hygiene':
+      return <IconHealthHygiene />;
+    case 'transportation':
+      return <IconTransport />;
+    case 'fun':
+      return <IconEntertainment />;
     default:
-      break;
+      return null;
   }
 }
 

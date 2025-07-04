@@ -14,10 +14,9 @@ import Alert from '../elements/Alert';
 import { useNavigate } from 'react-router-dom';
 
 const FormExpenditure = ({ expense }) => {
-
   const [description, setDescription] = useState('');
   const [amount, setAmount] = useState('');
-  const [category, setCategory] = useState('hogar');
+  const [category, setCategory] = useState('home');
   const [date, setDate] = useState(new Date());
   const { user } = useAuth();
   const [alert, setAlert] = useState({});
@@ -31,14 +30,14 @@ const FormExpenditure = ({ expense }) => {
         setCategory(expense.category);
         setDate(fromUnixTime(expense.date));
       } else {
-        navigate('expenses-list');
+        navigate('/expenses-list');
       }
     }
   }, [expense, user, navigate]);
 
   const handleChangeAmount = (e) => {
     setAmount(e.target.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1'));
-  }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -83,7 +82,7 @@ const FormExpenditure = ({ expense }) => {
 
       setDescription('');
       setAmount('');
-      setCategory('hogar');
+      setCategory('home');
       setDate(new Date());
       setAlert({
         type: 'success',
@@ -97,7 +96,7 @@ const FormExpenditure = ({ expense }) => {
         message: 'There was an error, try again'
       });
     }
-  }
+  };
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -141,12 +140,14 @@ const FormExpenditure = ({ expense }) => {
         </Button>
       </ButtonContainer>
 
-      {alert.message && <Alert
-        type={alert.type}
-        message={alert.message}
-        alertState={alert}
-        changeAlertState={setAlert}
-      />}
+      {alert.message && (
+        <Alert
+          type={alert.type}
+          message={alert.message}
+          alertState={alert}
+          changeAlertState={setAlert}
+        />
+      )}
     </Form>
   );
 }

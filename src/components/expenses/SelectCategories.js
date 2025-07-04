@@ -4,7 +4,6 @@ import theme from '../../theme'
 import { ReactComponent as IconArrowDown } from '../../images/down.svg';
 import IconCategory from '../elements/IconCategory';
 
-
 const ContenedorSelect = styled.div`
   background: ${theme.grisClaro};
   cursor: pointer;
@@ -23,91 +22,90 @@ const ContenedorSelect = styled.div`
   }
 `;
 
-const OpcionSeleccionada = styled.div`
-    width: 100%;
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    svg {
-        width: 1.25rem; /* 20px */
-        height: auto;
-        margin-left: 1.25rem; /* 20px */
-    }
+const SelectedOption = styled.div`
+  width: 100%;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  svg {
+    width: 1.25rem; /* 20px */
+    height: auto;
+    margin-left: 1.25rem; /* 20px */
+  }
 `;
 
-const Opciones = styled.div`
-    background: ${theme.grisClaro};
-    position: absolute;
-    top: 5.62rem; /* 90px */
-    left: 0;
-    width: 100%;
-    border-radius: 0.625rem; /* 10px */
-    max-height: 18.75rem; /* 300px */
-    overflow-y: auto;
+const Options = styled.div`
+  background: ${theme.grisClaro};
+  position: absolute;
+  top: 5.62rem; /* 90px */
+  left: 0;
+  width: 100%;
+  border-radius: 0.625rem; /* 10px */
+  max-height: 18.75rem; /* 300px */
+  overflow-y: auto;
 `;
 
-const Opcion = styled.div`
-    padding: 1.25rem; /* 20px */
-    display: flex;
-    svg {
-        width: 28px;
-        height: auto;
-        margin-right: 1.25rem; /* 20px */
-    }
-    &:hover {
-        background: ${theme.grisClaro2};
-    }
+const Option = styled.div`
+  padding: 1.25rem; /* 20px */
+  display: flex;
+  svg {
+    width: 28px;
+    height: auto;
+    margin-right: 1.25rem; /* 20px */
+  }
+  &:hover {
+    background: ${theme.grisClaro2};
+  }
 `;
 
 const SelectCategories = ({ category, setCategory }) => {
-
   const [showOptions, setShowOptions] = useState(false);
 
   const categories = [
     { id: 'food', text: 'Food' },
-    { id: 'accounts and payments', text: 'Accounts and payments' },
+    { id: 'bills', text: 'Bills & Payments' },
     { id: 'home', text: 'Home' },
-    { id: 'transportation', text: 'Transportation' },
-    { id: 'clothing', text: 'Clothing' },
-    { id: 'health and hygiene', text: 'Health and Hygiene' },
+    { id: 'transport', text: 'Transport' },
+    { id: 'clothes', text: 'Clothes' },
+    { id: 'health_hygiene', text: 'Health & Hygiene' },
     { id: 'shopping', text: 'Shopping' },
-    { id: 'fun', text: 'Fun' }
-  ]
+    { id: 'entertainment', text: 'Entertainment' }
+  ];
 
   const handleCategory = (e) => {
     setCategory(e.target.dataset.category);
-  }
+  };
 
   const handleOptionClick = (id, e) => {
     e && e.stopPropagation();
     setCategory(id);
     setShowOptions(false);
-  }
+  };
 
   return (
     <ContenedorSelect onClick={() => setShowOptions(!showOptions)}>
-      <OpcionSeleccionada>
+      <SelectedOption>
         <p>{category}</p>
         <IconArrowDown />
-      </OpcionSeleccionada>
+      </SelectedOption>
 
       {showOptions &&
-        <Opciones>
-          {categories.map(({ id, texto }) => (
-            <Opcion
+        <Options>
+          {categories.map(({ id, text }) => (
+            <Option
               key={id}
               data-category={id}
               onClick={handleCategory}
             >
               <IconCategory name={id} />
-              <p onClick={(e) => { handleOptionClick(id, e) }}>{texto}</p>
-            </Opcion>
+              <p onClick={(e) => { handleOptionClick(id, e) }}>{text}</p>
+            </Option>
           ))}
-        </Opciones>
+        </Options>
       }
     </ContenedorSelect>
   );
-}
+};
 
 export default SelectCategories;
